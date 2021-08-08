@@ -1,11 +1,11 @@
 <template>
   <div class="container">
     <p v-if="!comments.length">
-      <AppButton @click="getGomments">Загрузить комментарии</AppButton>
+      <app-button @click="getGomments">Загрузить комментарии</app-button>
     </p>
-    <AppLoader v-if="loading"/>
+    <app-loader v-if="loading"/>
     <div class="card" v-if="comments.length">
-      <AppTitle>Комментарии</AppTitle>
+      <resume-title>Комментарии</resume-title>
       <ul class="list">
         <li class="list-item" v-for="item in comments" :key="item.id">
           <div>
@@ -15,20 +15,19 @@
         </li>
       </ul>
       <p>
-        <AppButton type="warning" @click="removeComments">Удалить комментарии</AppButton>
+        <app-button type="warning" @click="removeComments">Удалить комментарии</app-button>
       </p>
     </div> 
   </div>
 </template>
 <script>
 
-import AppTitle from './AppTitle.vue';
-import AppButton from './AppButton.vue';
-import AppLoader from './AppLoader.vue';
+import ResumeTitle from './resume/ResumeTitle.vue';
 import axios from 'axios';
+import { loaderTime, commentsUrl } from '@/utils/constants.js';
 
 export default {
-  components: { AppTitle, AppButton, AppLoader },
+  components: { ResumeTitle },
   data() {
     return {
       comments: [],
@@ -39,12 +38,12 @@ export default {
     getGomments() {
       this.loading = true;
       setTimeout(async () => {
-        const { data } = await axios.get('https://jsonplaceholder.typicode.com/comments?_limit=42');
+        const { data } = await axios.get(commentsUrl);
         if (data || data.length) {
           this.comments = data;
         }
         this.loading = false;
-      }, 1000);
+      }, loaderTime);
     },
     removeComments() {
       this.comments = [];
