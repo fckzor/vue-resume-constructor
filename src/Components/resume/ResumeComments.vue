@@ -5,7 +5,7 @@
     </p>
     <app-loader v-if="loading"/>
     <div class="card" v-if="comments.length">
-      <resume-title>Комментарии</resume-title>
+      <h1>Комментарии</h1>
       <ul class="list">
         <li class="list-item" v-for="item in comments" :key="item.id">
           <div>
@@ -22,12 +22,10 @@
 </template>
 <script>
 
-import ResumeTitle from './resume/ResumeTitle.vue';
 import axios from 'axios';
 import { loaderTime, commentsUrl } from '@/utils/constants.js';
 
 export default {
-  components: { ResumeTitle },
   data() {
     return {
       comments: [],

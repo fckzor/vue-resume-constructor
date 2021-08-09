@@ -4,21 +4,20 @@
     @close="alert = null"
   />
   <resume
-    @success="setAlert"
-    @error="setAlert"
+    @response="setAlert"
   />
-  <app-comments/>
+  <resume-comments/>
 </template>
 
 <script>
 
 import AppAlert from './components/AppAlert.vue';
 import Resume from './components/resume/Resume.vue';
-import AppComments from './components/AppComments.vue';
+import ResumeComments from './components/resume/ResumeComments.vue';
 import { messages } from '@/utils/constants.js';
 
 export default {
-  components: { AppAlert, Resume, AppComments },
+  components: { AppAlert, Resume, ResumeComments },
   data() {
     return {
       alert: null
